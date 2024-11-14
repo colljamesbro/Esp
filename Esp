@@ -1,0 +1,37 @@
+-- Define the color and size for the selection box
+local selectionColor = Color3.fromRGB(0, 255, 0)  -- Green color for selection box
+local boxSize = Vector3.new(4, 7, 4)  -- Size of the selection box around players
+
+-- Function to add a selection box to a player
+local function addSelectionBoxToPlayer(player)
+    -- Check if the player has a character
+    if player.Character then
+        -- Create a BoxHandleAdornment to act as a selection box
+        local selectionBox = Instance.new("BoxHandleAdornment")
+        selectionBox.Size = boxSize
+        selectionBox.Color3 = selectionColor
+        selectionBox.Transparency = 0.5  -- Semi-transparent box
+        selectionBox.Adornee = player.Character  -- Attach to the player's character
+        selectionBox.AlwaysOnTop = true  -- Ensure it appears on top
+        selectionBox.ZIndex = 5
+        selectionBox.Parent = player.Character  -- Parent to the character so it moves with them
+    end
+end
+
+-- Function to highlight all players in the game
+local function highlightAllPlayers()
+    -- Loop through all players in the game
+    for _, player in pairs(game.Players:GetPlayers()) do
+        addSelectionBoxToPlayer(player)
+    end
+end
+
+-- Run the function to highlight all players initially
+highlightAllPlayers()
+
+-- Optional: listen for new players joining and add a highlight box
+game.Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function()
+        addSelectionBoxToPlayer(player)
+    end)
+end)
