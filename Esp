@@ -1,5 +1,5 @@
 -- Define the color and size for the selection box
-local selectionColor = Color3.fromRGB(0, 255, 0)  -- Green color for selection box
+local selectionColor = Color3.fromRGB(255, 0, 0)  -- Green color for selection box
 local boxSize = Vector3.new(4, 7, 4)  -- Size of the selection box around players
 
 -- Function to add a selection box to a player
